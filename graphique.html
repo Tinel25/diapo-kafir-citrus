@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact de la Gibbérelline sur Citrus hystrix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 600px;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #667eea33 0%, #764ba233 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .data-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #e9ecef;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin: 25px 0;
+        }
+
+        canvas {
+            max-height: 350px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Page de titre -->
+        <div class="slide active">
+            <h1>Impact de l'Acide Gibbérellique sur la Production de Feuilles de Citrus hystrix</h1>
+            <p class="subtitle">Citronnier Kafir (Combava)</p>
+            <div class="highlight" style="margin-top: 80px; text-align: center;">
+                <h3>Une étude sur l'optimisation de la culture d'une plante aromatique économiquement importante</h3>
+            </div>
+            <div style="text-align: center; margin-top: 100px; color: #666; font-size: 1.1em;">
+                <p>Durée de la présentation : 10 minutes</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <h2>Introduction</h2>
+            <h3>🌿 Qu'est-ce que le Citrus hystrix ?</h3>
+            <ul>
+                <li><strong>Nom commun :</strong> Citronnier kafir (combava)</li>
+                <li><strong>Usage :</strong> Feuilles aromatiques largement utilisées dans la cuisine asiatique</li>
+                <li><strong>Propriétés :</strong> Riche en métabolites volatils, notamment le citronellal</li>
+            </ul>
+
+            <div class="data-box">
+                <h3>Propriétés du citronellal</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Antifongiques</li>
+                    <li>Antibactériennes</li>
+                    <li>Anti-inflammatoires</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <strong>Objectif de l'étude :</strong> Évaluer l'impact de différentes concentrations d'acide gibbérellique (GA) et de la taille sur la croissance et la production de feuilles
+            </div>
+        </div>
+
+        <!-- Slide 3: Contexte et enjeux -->
+        <div class="slide">
+            <h2>Contexte et Enjeux</h2>
+            
+            <h3>📊 Situation actuelle</h3>
+            <div class="data-box">
+                <p>La production de feuilles de combava est actuellement <strong>principalement locale</strong> et peu intensive</p>
+            </div>
+
+            <h3>🎯 Importance de cette étude</h3>
+            <ul>
+                <li><strong>Matière première importante</strong> pour l'industrie alimentaire et pharmaceutique</li>
+                <li>Besoin d'<strong>optimiser la culture</strong> de cette espèce</li>
+                <li>Comprendre les mécanismes de croissance pour intensifier la production</li>
+            </ul>
+
+            <div class="highlight">
+                <h3>Question de recherche</h3>
+                <p>Comment la gibbérelline et la taille influencent-elles la production foliaire du Citrus hystrix ?</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Matériel et Méthodes -->
+        <div class="slide">
+            <h2>Matériel et Méthodes</h2>
+            
+            <h3>🌱 Matériel végétal</h3>
+            <p>Plants de Citrus hystrix greffés sur des porte-greffes de <strong>limette de Rangpur</strong></p>
+
+            <h3>🧪 Traitements appliqués</h3>
+            <div class="two-columns">
+                <div class="data-box">
+                    <strong>Concentrations de GA :</strong>
+                    <ul>
+                        <li>Témoin (0 %)</li>
+                        <li>0,005 %</li>
+                        <li>0,01 %</li>
+                        <li>0,02 %</li>
+                    </ul>
+                </div>
+                <div class="data-box">
+                    <strong>Taille :</strong>
+                    <ul>
+                        <li>Pas de taille</li>
+                        <li>Taille à 30 cm au-dessus du point de greffe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📏 Paramètres mesurés</h3>
+            <p>Hauteur des plants • Nombre de pousses • Longueur des feuilles • Surface foliaire • Poids des feuilles</p>
+        </div>
+
+        <!-- Slide 5: Conditions expérimentales -->
+        <div class="slide">
+            <h2>Conditions Expérimentales</h2>
+            
+            <div class="data-box">
+                <h3>📍 Lieu de l'expérience</h3>
+                <p><strong>Sumedang, Indonésie</strong> - Conditions de champ ouvert</p>
+            </div>
+
+            <div class="two-columns">
+                <div class="highlight">
+                    <h3>🌡️ Conditions climatiques</h3>
+                    <ul>
+                        <li>Température : 26-28°C</li>
+                        <li>Humidité relative : 46-53%</li>
+                    </ul>
+                </div>
+                <div class="highlight">
+                    <h3>🔬 Analyse</h3>
+                    <ul>
+                        <li>Plan en parcelles divisées</li>
+                        <li>5 répétitions</li>
+                        <li>Analyse statistique ANOVA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="data-box" style="margin-top: 30px;">
+                <h3>⏱️ Durée de l'expérience</h3>
+                <p>De janvier à juillet 2023 - Observations sur 8 semaines après traitement</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Résultats - Effets de la GA -->
+        <div class="slide">
+            <h2>Résultats - Effets de la Gibbérelline</h2>
+            
+            <div class="chart-container">
+                <canvas id="chartGA"></canvas>
+            </div>
+
+            <div class="highlight">
+                <p><strong>Concentration à 0,02% (sans taille) :</strong></p>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>+77% de feuilles par rapport au témoin</li>
+                    <li>+64% de poids des feuilles</li>
+                    <li>+31,5 cm de longueur des pousses</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Résultats - Effets de la taille -->
+        <div class="slide">
+            <h2>Résultats - Effets de la Taille</h2>
+            
+            <div class="chart-container">
+                <canvas id="chartPruning"></canvas>
+            </div>
+
+            <div class="highlight">
+                <p><strong>⚠️ Impact négatif majeur de la taille :</strong></p>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>Réduction de -53% de la hauteur</li>
+                    <li>Réduction de -44% de la longueur des pousses</li>
+                    <li>Réduction de -26% de la surface foliaire</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Explication :</strong> La taille réduit la capacité source en éliminant les feuilles photosynthétiques</p>
+        </div>
+
+        <!-- Slide 8: Analyses statistiques -->
+        <div class="slide">
+            <h2>Analyses Multivariées</h2>
+            
+            <div class="chart-container">
+                <canvas id="chartCorrelation"></canvas>
+            </div>
+
+            <h3>📐 Modèles de régression quadratiques</h3>
+            <div class="highlight">
+                <p><strong>Coefficient de détermination (R²) > 90%</strong></p>
+                <p>Relation claire et prédictive entre la concentration de GA et la production foliaire</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Interaction GA × Taille -->
+        <div class="slide">
+            <h2>Interaction GA × Taille</h2>
+            
+            <div class="chart-container">
+                <canvas id="chartInteraction"></canvas>
+            </div>
+
+            <div class="conclusion-box">
+                <p><strong>Constat principal :</strong> L'effet bénéfique de la gibbérelline est fortement diminué par la taille en raison de la réduction de la capacité photosynthétique</p>
+            </div>
+
+            <div class="two-columns" style="margin-top: 20px;">
+                <div class="data-box">
+                    <p>✅ <strong>Sans taille :</strong> La GA augmente significativement la production</p>
+                </div>
+                <div class="data-box">
+                    <p>❌ <strong>Avec taille :</strong> L'effet de la GA est limité par la capacité source réduite</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion et perspectives -->
+        <div class="slide">
+            <h2>Conclusion et Perspectives</h2>
+            
+            <h3>🎯 Conclusions principales</h3>
+            <div class="data-box">
+                <ul>
+                    <li>La <strong>gibbérelline stimule</strong> efficacement la croissance foliaire (jusqu'à 0,02%)</li>
+                    <li>La <strong>taille réduit</strong> la capacité source et la production</li>
+                    <li>Les deux facteurs ont des effets <strong>antagonistes</strong></li>
+                </ul>
+            </div>
+
+            <h3>🔬 Perspectives de recherche</h3>
+            <div class="highlight">
+                <ul>
+                    <li>Explorer des <strong>concentrations > 0,02%</strong> pour accélérer la récupération après taille</li>
+                    <li>Étudier l'impact de <strong>différents porte-greffes</strong></li>
+                    <li>Comprendre les <strong>mécanismes moléculaires</strong> sous-jacents</li>
+                    <li>Optimiser le <strong>calendrier d'application</strong> de la GA</li>
+                </ul>
+            </div>
+
+            <h3>💼 Applications pratiques</h3>
+            <p>Ces résultats permettront d'optimiser les pratiques culturales pour la production commerciale de feuilles de combava</p>
+        </div>
+
+        <!-- Slide 11: Merci -->
+        <div class="slide">
+            <div style="text-align: center; padding-top: 150px;">
+                <h1 style="font-size: 3em; margin-bottom: 50px;">Merci pour votre attention</h1>
+                <div class="highlight" style="display: inline-block; padding: 30px 60px;">
+                    <h2 style="border: none; margin: 0; color: #667eea;">Questions ?</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">11</span>
+            </span>
+            <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let chartsCreated = false;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function createCharts() {
+            if (chartsCreated) return;
+            chartsCreated = true;
+
+            // Graphique 1: Effet de la GA sur la production (sans taille)
+            const ctx1 = document.getElementById('chartGA').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['0%', '0.005%', '0.01%', '0.02%'],
+                    datasets: [{
+                        label: 'Nombre de feuilles',
+                        data: [17, 20, 22, 30],
+                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Poids des feuilles (g)',
+                        data: [0.79, 0.94, 1.05, 1.30],
+                        backgroundColor: 'rgba(118, 75, 162, 0.7)',
+                        borderColor: 'rgba(118, 75, 162, 1)',
+                        borderWidth: 2,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { size: 14 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Impact de la concentration en GA (sans taille)',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: { display: true, text: 'Nombre de feuilles' },
+                            beginAtZero: true
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            title: { display: true, text: 'Poids (g)' },
+                            beginAtZero: true,
+                            grid: { drawOnChartArea: false }
+                        }
+                    }
+                }
+            });
+
+            // Graphique 2: Comparaison taille vs pas de taille
+            const ctx2 = document.getElementById('chartPruning').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Hauteur (cm)', 'Nb pousses', 'Long. feuilles (cm)', 'Surface fol. (cm²)'],
+                    datasets: [{
+                        label: 'Sans taille',
+                        data: [85.17, 6.67, 11.66, 33.27],
+                        backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'Avec taille',
+                        data: [51.33, 4.17, 9.68, 24.66],
+                        backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { size: 14 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Effet de la taille sur différents paramètres',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Valeur mesurée' }
+                        }
+                    }
+                }
+            });
+
+            // Graphique 3: Corrélation GA
+            const ctx3 = document.getElementById('chartCorrelation').getContext('2d');
+            new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Longueur pousses', 'Nombre feuilles', 'Poids feuilles'],
+                    datasets: [{
+                        label: 'Coefficient de corrélation (r)',
+                        data: [0.86, 0.78, 0.83],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.7)',
+                            'rgba(118, 75, 162, 0.7)',
+                            'rgba(76, 201, 240, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(76, 201, 240, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Corrélations entre GA et paramètres de croissance',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1,
+                            title: { display: true, text: 'Coefficient r' }
+                        }
+                    }
+                }
+            });
+
+            // Graphique 4: Interaction GA × Taille
+            const ctx4 = document.getElementById('chartInteraction').getContext('2d');
+            new Chart(ctx4, {
+                type: 'line',
+                data: {
+                    labels: ['0%', '0.005%', '0.01%', '0.02%'],
+                    datasets: [{
+                        label: 'Sans taille',
+                        data: [17, 20, 22, 30],
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3
+                    }, {
+                        label: 'Avec taille',
+                        data: [15, 16, 15, 17],
+                        backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { font: { size: 14 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Interaction GA × Taille sur le nombre de feuilles',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Nombre de feuilles' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Concentration en GA' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+            // Créer les graphiques quand on arrive sur une slide avec graphique
+            if (currentSlide >= 5 && !chartsCreated) {
+                createCharts();
+            }
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
